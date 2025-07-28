@@ -30,4 +30,4 @@ Features:-
                                 
 How I built it?
 
-It has been made with the little help of youtube tutorials, artificial intelligence and lot of documentations.
+It has been made with a little help of youtube tutorials, artificial intelligence and lot of documentations.
