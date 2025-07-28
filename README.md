@@ -19,9 +19,9 @@ Features:-
 
     • Keyboard Input support - The calculator takes input from the keyboard as well.
       USE: 
-            C or ESC => Clear btn
-            Enter => Equal btn
-            Backspace => CE btn
+            "C" or "ESC" => Clear btn
+            "Enter" => Equal btn
+            "Backspace" => CE btn
             
     • Dark/light mode - The calculator has two modes(dark and light). The theme toggle is on the top right corner.
     
