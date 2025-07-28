@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Calculator | Priyanshu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #1E1E1E;
+            --bg-light: #343541;
+            --border-color: #3E3F4B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #D1D5DB;
+            --highlight: rgba(255, 255, 255, 0.1);
+            --transition: all 0.2s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+            background-color: var(--highlight);
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .about, .features, .projects, .contact {
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .about p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            line-height: 1.7;
+        }
+
+        .education-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .education-card {
+            padding: 1.5rem;
+            background-color: rgba(62, 63, 75, 0.2);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .education-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .education-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature {
+            padding: 0.5rem 1rem;
+            background-color: rgba(62, 63, 75, 0.2);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .feature:hover {
+            background-color: var(--highlight);
+            transform: scale(1.05);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .project-card {
+            padding: 1.5rem;
+            background-color: rgba(62, 63, 75, 0.2);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            word-break: break-word;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.5rem;
+            background-color: rgba(62, 63, 75, 0.5);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .project-links a:hover {
+            background-color: var(--highlight);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: rgba(62, 63, 75, 0.2);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            word-break: break-word;
+        }
+
+        .contact-card:hover {
+            background-color: var(--highlight);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            flex-shrink: 0;
+        }
+
+        .contact-icon .fa-linkedin {
+            color: #0a66c2;
+        }
+
+        .contact-card div {
+            flex-grow: 1;
+        }
+
+        .contact-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .contact-card a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-card a:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                gap: 0.8rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .about, .features, .projects, .contact {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .education-info, .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                padding: 0;
+            }
+
+            .about, .features, .projects, .contact {
+                padding: 1.2rem;
+            }
+
+            .project-card {
+                padding: 1.2rem;
+            }
+
+            .education-card, .contact-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Classic - Calculator</div>
+            <nav>
+                <ul>
+                    <li><a href="#projects">GDG</a></li>   
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Priyanshu Kumar</h1>
+            <p>Information Technology | 2024 Batch </p>
+            <div class="project-links"><a href="/calculator.html" target="_blank"><h3>Launch Calculator</h3></a></div>
+        </section>
+
+        <section id="projects" class="projects">
+            <h2>GDG - Project</h2>
+            <div class="projects-center">
+                <div class="project-card">
+                    <h3>Calculator</h3>
+                    <p>This Calculator Web-Application is a responsive, user-friendly tool built with HTML, CSS, and JavaScript that performs basic arithmetic operations such as addition, subtraction, multiplication, and division. <p>It features a modern interface with clickable buttons, keyboard input support, a clear display area, and functionality for clearing or deleting entries. The app includes a real-time calculation history panel that users can toggle or clear, and supports both light and dark themes via a mode switch.</p> 
+                    <p>The app features a classic and minimalist design with a sleek button layout and clean interface, offering a distraction-free and visually appealing user experience.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Code</a>
+                        <a href="/calculator.html" target="_blank">Launch Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Features</h2>
+            <div class="features-container">
+                <div class="feature"> <b>Dark/Light Mode </b>✅</div>
+                <div class="feature"> <b>History of Calculator</b> ✅</div>
+                <div class="feature"> <b>Keyboard input support</b> ✅</div>
+                <div class="feature"> <b>Responsive UI</b> ✅</div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>About</h2>
+            <p>This is Priyanshu from 2024 Batch. </p>
+            <p>I love to <em>play football</em>, <em>read books</em> and dive deep into the technologies that is being used in the field of Computers</p>
+            <p>This web-application is made with the help of "Youtube tutorials",  "Artificial Intelligence"(<i>particularly Deepseek</i>) and a lot of Documentations.</p>
+            <div class="education-info">
+                <div class="education-card">
+                    <h3>Education</h3>
+                    <p>Bachelor of Technology (B.Tech)</p>
+                    <p>Information Technology [2024-28]</p>
+                </div>
+                <div class="education-card">
+                    <h3>Institute</h3>
+                    <p>Muzaffarpur Institute of Technology, Muzaffarpur</p>
+                </div>
+                <div class="education-card">
+                    <h3>Current Status</h3>
+                    <p>Pursuing Degree</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contact" class="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                    <div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:prishukumar062@gmail.com">prishukumar062@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <span class="contact-icon"><i class="fab fa-github"></i></span>
+                    <div>
+                        <h3>GitHub</h3>
+                        <p><a href="https://github.com/theinertodyssey" target="_blank">github.com/theinertodyssey</a></p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <span class="contact-icon"><i class="fab fa-linkedin"></i></span>
+                    <div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/theinertodyssey/" target="_blank">linkedin.com/in/theinertodyssey</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Priyanshu. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
